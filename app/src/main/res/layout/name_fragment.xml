@@ -16,21 +16,21 @@
 
     <Button
         android:id="@+id/name_button"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/show_text"
         android:text="@string/hello_button" />
 
     <Button
         android:id="@+id/clear_button"
-        android:layout_width="356dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/name_button"
         android:text="@string/clear_button" />
 
     <TextView
         android:id="@+id/show_text"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text"
         android:layout_centerHorizontal="true"

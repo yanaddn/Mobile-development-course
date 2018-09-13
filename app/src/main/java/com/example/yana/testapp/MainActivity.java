@@ -3,37 +3,49 @@ package com.example.yana.testapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    private EditText editText;
+    private TextView showName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.name_fragment);
-        getGreeting();
+        setContentView(R.layout.activity_main);
+
+        editText = findViewById(R.id.edit_text);
+        showName = findViewById(R.id.show_text);
+        initNameButton();
+        initClearButton();
+
     }
 
-    protected void getGreeting() {
-        final EditText editText = (EditText) findViewById(R.id.edit_text);
-        final Button clearButton = (Button) findViewById(R.id.clear_button);
-        final Button showSayHiButton = (Button) findViewById(R.id.name_button);
-        final TextView showText = (TextView) findViewById(R.id.show_text);
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editText.setText("");
-            }
-        });
+    public void initNameButton() {
+        findViewById(R.id.name_button).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showGreeting();
+                    }
+                }
+        );
+    }
 
-        showSayHiButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = editText.getText().toString();
-                showText.setText("Hi " + name + "!");
-            }
-        });
+    private void initClearButton() {
+        findViewById(R.id.clear_button).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editText.setText("");
+                    }
+                }
+        );
+    }
+    private void showGreeting() {
+        String name = editText.getText().toString();
+
+        showName.setText("Hi " + name + "!");
     }
 }
