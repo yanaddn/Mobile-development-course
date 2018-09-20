@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
-    <include layout="@layout/name_fragment" />
+    <include layout="@layout/selection_fragment" />
 
 </android.support.constraint.ConstraintLayout>
 
