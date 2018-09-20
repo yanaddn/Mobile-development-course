@@ -15,15 +15,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String PASSWORD_VALID = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
     protected TextView result;
     protected String text;
-    protected EditText first_name_input;
-    protected EditText last_name_input;
-    protected EditText email_input;
-    protected EditText phone_input;
-    protected EditText password_input;
-    protected EditText verify_password_input;
-    protected Button submit_button_input;
+    protected EditText firstNameInput;
+    protected EditText lastNameInput;
+    protected EditText emailInput;
+    protected EditText phoneInput;
+    protected EditText passwordInput;
+    protected EditText verifyPasswordInput;
+    protected Button submitButtonInput;
     protected Boolean validation;
-
 
     @Override
     @SuppressLint("SetTextI18n")
@@ -32,67 +31,67 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         result = findViewById(R.id.result);
-        first_name_input = findViewById(R.id.first_name_input);
-        last_name_input = findViewById(R.id.last_name_input);
-        email_input = findViewById(R.id.email_input);
-        phone_input = findViewById(R.id.phone_input);
-        password_input = findViewById(R.id.password_input);
-        verify_password_input = findViewById(R.id.verify_password_input);
-        submit_button_input = findViewById(R.id.submit_button);
+        firstNameInput = findViewById(R.id.first_name_input);
+        lastNameInput = findViewById(R.id.last_name_input);
+        emailInput = findViewById(R.id.email_input);
+        phoneInput = findViewById(R.id.phone_input);
+        passwordInput = findViewById(R.id.password_input);
+        verifyPasswordInput = findViewById(R.id.verify_password_input);
+        submitButtonInput = findViewById(R.id.submit_button);
 
-        ButtonOnClick();
+        buttonOnClick();
     }
 
-    public void ButtonOnClick() {
+    public void buttonOnClick() {
 
-        submit_button_input.setOnClickListener(new View.OnClickListener() {
+        submitButtonInput.setOnClickListener(new View.OnClickListener() {
 
             @Override
             @SuppressLint("SetTextI18n")
             public void onClick(View v) {
                 result.setText("");
                 validation = true;
-                StringChecker(first_name_input, NAME_VALID);
-                StringChecker(last_name_input, NAME_VALID);
-                StringChecker(email_input, EMAIL_VALID);
-                StringChecker(phone_input, PHONE_VALID);
-                StringChecker(password_input, PASSWORD_VALID);
-                PasswordChecker();
+                stringChecker(firstNameInput, NAME_VALID, "first name");
+                stringChecker(lastNameInput, NAME_VALID, "last name");
+                stringChecker(emailInput, EMAIL_VALID, "email");
+                stringChecker(phoneInput, PHONE_VALID, "phone");
+                stringChecker(passwordInput, PASSWORD_VALID, "password");
+                passwordChecker();
                 if (validation) {
                     result.setText("Correct!");
                 }
             }
         });
-    }
+}
 
     @SuppressLint("SetTextI18n")
-    public void StringChecker(EditText row_id, String term) {
+    public void stringChecker(EditText row_id, String term, String row_name) {
         String value = String.valueOf(row_id.getText());
         String existing_value = String.valueOf(result.getText());
         if (value.equals("")) {
             validation = false;
-            result.setText(existing_value + "Can't be empty\n");
-            row_id.setError("Can't be empty\n");
+            result.setText(existing_value + "\nEmpty " + row_name);
+            row_id.setError("Empty " + row_name);
         } else if (!(value.matches(term))) {
             validation = false;
-            result.setText(existing_value + "Incorrect field");
-            row_id.setError("Incorrect field");
+            result.setText(existing_value + "\nIncorrect " + row_name);
+            row_id.setError("Incorrect " + row_name);
         }
     }
 
     @SuppressLint("SetTextI18n")
-    public void PasswordChecker() {
-        String password_value = String.valueOf(password_input.getText());
-        String valid_password_value = String.valueOf(verify_password_input.getText());
+    public void passwordChecker() {
+        String password_value = String.valueOf(passwordInput.getText());
+        String valid_password_value = String.valueOf(verifyPasswordInput.getText());
         if (valid_password_value.equals("") && (password_value.equals(""))) {
             validation = false;
-            verify_password_input.setError("Can't be empty");
+            verifyPasswordInput.setError("Any field can't be empty");
             String existing_value = String.valueOf(result.getText());
-            result.setText("Can't be empty\n" + existing_value);
+            result.setText("Any field can't be empty\n" + existing_value);
         }
         if (!(password_value.equals(valid_password_value))) {
             validation = false;
-            verify_password_input.setError("Passwords aren't similar");
+            verifyPasswordInput.setError("Passwords aren't similar");
             String existing_value = String.valueOf(result.getText());
             result.setText("Passwords aren't similar\n" + existing_value);
         }
